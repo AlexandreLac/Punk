@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Punk</title>
+	<link rel="stylesheet" type="text/css" href="public/css/index.css">
+</head>
+<body>
+	<!-- <img src="public/img/trait.svg" alt="trait"/> -->
+	<svg width="3100" height="600">
+		<path id="line" class="st0" d="M2,72.8c267-130,434,278,700,301s646-99,652-261s-589-67-221,232s608,200,761,94s775-757,1127-239"/>
+		<!-- <g id="box"> -->
+			<!-- <circle class="st0" cx="0" cy="0" r="1"></circle> -->
+		<!-- </g> -->
+	</svg>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<!-- <script type="text/javascript" src="public/js/Tween.js"></script>
+<script type="text/javascript" src="public/js/Draggable.js"></script> -->
+<script>
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
+    radius = 32;
+
+var path = d3.select("path#line");
+// console.log(circles);
+// var circle = [{x:400,y:233}];
+
+
+// svg.selectAll("circle")
+//   .data(circle)
+//   //.enter().append("circle")
+//     .attr("cx", function(d) { return d.x; })
+//     .attr("cy", function(d) { return d.y; })
+//     .attr("r", radius)
+//     // .style("fill", function(d, i) { return color(i); })
+//     .call(d3.drag()
+//         .on("start", dragstarted)
+//         .on("drag", dragged)
+//         .on("end", dragended));
+
+// function dragstarted(d) {
+//   d3.select(this).raise().classed("active", true);
+// }
+
+// function dragged(d) {
+//   d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+// }
+
+// function dragended(d) {
+//   d3.select(this).classed("active", false);
+// }
+
+
+
+// var points = [[600,276],[586,393],[378,388],[589,148],[346,227],[365,108]];
+
+// var width = 960,
+//     height = 500;
+
+var line = d3.svg.line()
+    .interpolate("cardinal");
+    
+var drag = d3.behavior.drag()
+    .on("drag", dragged);
+
+// var svg = d3.select("body").append("svg")
+//     .attr("width", width)
+//     .attr("height", height);
+
+// var path = svg.append("path")
+//     .datum(points)
+//     .attr("d", line);
+
+var line = svg.append("line");
+
+var circle = svg.append("circle")
+  .attr("transform", "translate("+path.node()[0].x+","+path.node()[0].y+")")
+  .attr("r", 7)
+  .style("fill", "#ffffff")
+  .call(drag);
+    
+// svg.append("circle")
+//   .attr("transform", "translate(" + points[5] + ")")
+//   .attr("r", 7)
+//   .call(drag);
+
+function dragged(d) {
+  var m = d3.mouse(svg.node()),
+    p = closestPoint(path.node(), m);
+
+  d3.select(this)
+    .attr("transform", "translate(" + p[0] + "," + p[1] + ")")
+}
+
+function closestPoint(pathNode, point) {
+	var pathLength = pathNode.getTotalLength(),
+		precision = 8,
+		best,
+		bestLength,
+		bestDistance = Infinity;
+
+	// linear scan for coarse approximation
+	for (var scan, scanLength = 0, scanDistance; scanLength <= pathLength; scanLength += precision) {
+		if ((scanDistance = distance2(scan = pathNode.getPointAtLength(scanLength))) < bestDistance) {
+		  	best = scan, bestLength = scanLength, bestDistance = scanDistance;
+		}
+	}
+
+	// binary search for precise estimate
+	precision /= 2;
+	while (precision > 0.5) {
+		var before,
+		    after,
+		    beforeLength,
+		    afterLength,
+		    beforeDistance,
+		    afterDistance;
+		if ((beforeLength = bestLength - precision) >= 0 && (beforeDistance = distance2(before = pathNode.getPointAtLength(beforeLength))) < bestDistance) {
+		  	best = before, bestLength = beforeLength, bestDistance = beforeDistance;
+		} else if ((afterLength = bestLength + precision) <= pathLength && (afterDistance = distance2(after = pathNode.getPointAtLength(afterLength))) < bestDistance) {
+		  	best = after, bestLength = afterLength, bestDistance = afterDistance;
+		} else {
+		  	precision /= 2;
+		}
+	}
+
+	best = [best.x, best.y];
+	best.distance = Math.sqrt(bestDistance);
+	return best;
+
+	function distance2(p) {
+	var dx = p.x - point[0],
+	    dy = p.y - point[1];
+	return dx * dx + dy * dy;
+	}
+}
+
+
+
+// Draggable.create("#box", {
+//   type:"x,y",
+//   bounds:"#line",
+//   overshootTolerance:0,
+//   throwProps:true
+// })
+
+</script>
+</body>
+</html>
