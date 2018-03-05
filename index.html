@@ -9,7 +9,7 @@
 	<svg width="3100" height="600">
 		<path id="line" class="st0" d="M2,72.8c267-130,434,278,700,301s646-99,652-261s-589-67-221,232s608,200,761,94s775-757,1127-239"/>
 		<!-- <g id="box"> -->
-			<!-- <circle class="st0" cx="0" cy="0" r="1"></circle> -->
+		<!-- <circle class="st0" cx="5" cy="70" r="7"></circle> -->
 		<!-- </g> -->
 	</svg>
 
@@ -79,9 +79,10 @@ var drag = d3.behavior.drag()
 var line = svg.append("line");
 
 var circle = svg.append("circle")
-  .attr("transform", "translate("+path.node()[0].x+","+path.node()[0].y+")")
+  .attr("transform", "translate(5,70)")
   .attr("r", 7)
   .style("fill", "#ffffff")
+  .classed("st0",true)
   .call(drag);
     
 // svg.append("circle")
