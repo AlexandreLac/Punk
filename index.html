@@ -8,9 +8,19 @@
 	<!-- <img src="public/img/trait.svg" alt="trait"/> -->
 	<svg width="3100" height="600">
 		<path id="line" class="st0" d="M2,72.8c267-130,434,278,700,301s646-99,652-261s-589-67-221,232s608,200,761,94s775-757,1127-239"/>
-		<!-- <g id="box"> -->
-		<!-- <circle class="st0" cx="5" cy="70" r="7"></circle> -->
-		<!-- </g> -->
+		<g id="box">
+			<circle id="circle" class="st0" cx="0" cy="0" r="0"/>
+		</g>
+		<g id="a">
+			<text x="20" y="150">Amphétamines</text>
+			<text x="20" y="200">Anarchie</text>
+			<text x="180" y="150">Antisémitisme</text>
+			<text x="180" y="200">Asphalt Jungle</text>
+		</g>
+		<g id="b" hidden>
+			<text x="450" y="150">Blank Generation</text>
+			<text x="600" y="150">Bondage</text>
+		</g>
 	</svg>
 
 
@@ -20,7 +30,7 @@
 <!-- <script type="text/javascript" src="public/js/Tween.js"></script>
 <script type="text/javascript" src="public/js/Draggable.js"></script> -->
 <script>
-
+var lettre;
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height"),
@@ -78,12 +88,25 @@ var drag = d3.behavior.drag()
 
 var line = svg.append("line");
 
-var circle = svg.append("circle")
-  .attr("transform", "translate(5,70)")
-  .attr("r", 7)
-  .style("fill", "#ffffff")
-  .classed("st0",true)
-  .call(drag);
+var circle = d3.select("circle")
+		.attr("transform", "translate(27,63)")
+  		.attr("r", 25)
+		.call(drag);
+
+
+circle.append("text")
+   	.append("textPath")
+   	.attr("xlink:href", "#circle")
+	.style("text-anchor","middle")
+	.style("fill","ffffff")
+	.attr("startOffset", "50%")
+	.text("A");
+// var circle = svg.append("circle")
+//   .attr("transform", "translate(5,70)")
+//   .attr("r", 20)
+//   .style("fill", "#ffffff")
+//   .classed("st0",true)
+//   .call(drag);
     
 // svg.append("circle")
 //   .attr("transform", "translate(" + points[5] + ")")
@@ -91,16 +114,52 @@ var circle = svg.append("circle")
 //   .call(drag);
 
 function dragged(d) {
-  var m = d3.mouse(svg.node()),
+  	var m = d3.mouse(svg.node()),
     p = closestPoint(path.node(), m);
+    // console.log(p[0],p[1]);
+    cumul = p[0] + p[1];
+    diff = 300;
+    if(cumul < diff){
+    	ChangeLettre("a");
+    } else if(cumul > diff && cumul < diff*2){
+    	ChangeLettre("b");
+    } else if(cumul > diff*2 && cumul < diff*3){
+    	ChangeLettre("c");
+    } else if(cumul > diff*3 && cumul < diff*4){
+    	ChangeLettre("f");
+    } else if(cumul > diff*4 && cumul < diff*5){
+    	ChangeLettre("h");
+    } else if(cumul > diff*5 && cumul < diff*6){
+    	ChangeLettre("m");
+    } else if(cumul > diff*6 && cumul < diff*7){
+    	ChangeLettre("n");
+    } else if(cumul > diff*7 && cumul < diff*8){
+    	ChangeLettre("p");
+    } else if(cumul > diff*8 && cumul < diff*9){
+    	ChangeLettre("r");
+    } else if(cumul > diff*9 && cumul < diff*10){
+    	ChangeLettre("s");
+    } else {
+    	ChangeLettre("w");
+    }
 
-  d3.select(this)
+
+
+  	d3.select(this)
     .attr("transform", "translate(" + p[0] + "," + p[1] + ")")
 }
 
+function ChangeLettre(key) {
+	if(key != lettre) {
+		lettre = key;
+
+		console.log("Change lettre to ",key);		
+	}
+}
+// a,b,c,f,h,m,n,p,r,s,w
 function closestPoint(pathNode, point) {
 	var pathLength = pathNode.getTotalLength(),
-		precision = 8,
+		precision = 10,
 		best,
 		bestLength,
 		bestDistance = Infinity;
@@ -135,9 +194,9 @@ function closestPoint(pathNode, point) {
 	return best;
 
 	function distance2(p) {
-	var dx = p.x - point[0],
-	    dy = p.y - point[1];
-	return dx * dx + dy * dy;
+		var dx = p.x - point[0],
+		    dy = p.y - point[1];
+		return dx * dx + dy * dy;
 	}
 }
 
