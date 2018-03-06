@@ -5,7 +5,6 @@
 	<link rel="stylesheet" type="text/css" href="public/css/index.css">
 </head>
 <body>
-	<!-- <img src="public/img/trait.svg" alt="trait"/> -->
 	<svg width="3100" height="600">
 		<path id="line" class="st0" d="M2,72.8c267-130,434,278,700,301s646-99,652-261s-589-67-221,232s608,200,761,94s775-757,1127-239"/>
 		<g id="box">
@@ -17,9 +16,43 @@
 			<text x="180" y="150">Antisémitisme</text>
 			<text x="180" y="200">Asphalt Jungle</text>
 		</g>
-		<g id="b" hidden>
+		<g id="b" visibility="visible">
 			<text x="450" y="150">Blank Generation</text>
 			<text x="600" y="150">Bondage</text>
+		</g>
+		<g id="c" visibility="visible">
+			<text x="750" y="200">CBGB</text>
+			<text x="900" y="200">The Clash</text>
+		</g>
+		<g id="f" visibility="visible">
+			<text x="900" y="450">Fanzine</text>
+		</g>
+		<g id="h" visibility="visible">
+			<text x="1200" y="300">Richard Hell</text>
+			<text x="1350" y="300">Hippie</text>
+		</g>
+		<g id="m" visibility="visible">
+			<text x="1500" y="150">Malcolm McLaren</text>
+			<text x="1700" y="150">MC5</text>
+			<text x="1500" y="200">Metal Urbain</text>
+		</g>
+		<g id="n" visibility="visible">
+			<text x="1400" y="400">New Wave</text>
+		</g>
+		<g id="p" visibility="visible">
+			<text x="1700" y="400">Provocation</text>
+		</g>
+		<g id="r" visibility="visible">
+			<text x="1900" y="250">Jamie Reid</text>
+		</g>
+		<g id="s" visibility="visible">
+			<text x="2200" y="300">Sex</text>
+			<text x="2350" y="300">Skydog</text>
+			<text x="2200" y="400">Svastika</text>
+			<text x="2350" y="400">Sid Vicious</text>
+		</g>
+		<g id="w" visibility="visible">
+			<text x="2600" y="250">Vivienne Westwood</text>
 		</g>
 	</svg>
 
@@ -27,64 +60,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
-<!-- <script type="text/javascript" src="public/js/Tween.js"></script>
-<script type="text/javascript" src="public/js/Draggable.js"></script> -->
 <script>
-var lettre;
+var lettre="a";
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height"),
     radius = 32;
 
 var path = d3.select("path#line");
-// console.log(circles);
-// var circle = [{x:400,y:233}];
-
-
-// svg.selectAll("circle")
-//   .data(circle)
-//   //.enter().append("circle")
-//     .attr("cx", function(d) { return d.x; })
-//     .attr("cy", function(d) { return d.y; })
-//     .attr("r", radius)
-//     // .style("fill", function(d, i) { return color(i); })
-//     .call(d3.drag()
-//         .on("start", dragstarted)
-//         .on("drag", dragged)
-//         .on("end", dragended));
-
-// function dragstarted(d) {
-//   d3.select(this).raise().classed("active", true);
-// }
-
-// function dragged(d) {
-//   d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-// }
-
-// function dragended(d) {
-//   d3.select(this).classed("active", false);
-// }
-
-
-
-// var points = [[600,276],[586,393],[378,388],[589,148],[346,227],[365,108]];
-
-// var width = 960,
-//     height = 500;
 
 var line = d3.svg.line()
     .interpolate("cardinal");
     
 var drag = d3.behavior.drag()
     .on("drag", dragged);
-
-// var svg = d3.select("body").append("svg")
-//     .attr("width", width)
-//     .attr("height", height);
-
-// var path = svg.append("path")
-//     .datum(points)
-//     .attr("d", line);
 
 var line = svg.append("line");
 
@@ -151,6 +140,8 @@ function dragged(d) {
 
 function ChangeLettre(key) {
 	if(key != lettre) {
+		// document.getElementById(lettre).style.visibility = "hidden";
+		// document.getElementById(key).style.visibility = "visible";
 		lettre = key;
 
 		console.log("Change lettre to ",key);		
@@ -199,16 +190,6 @@ function closestPoint(pathNode, point) {
 		return dx * dx + dy * dy;
 	}
 }
-
-
-
-// Draggable.create("#box", {
-//   type:"x,y",
-//   bounds:"#line",
-//   overshootTolerance:0,
-//   throwProps:true
-// })
-
 </script>
 </body>
 </html>
