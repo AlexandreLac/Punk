@@ -11,9 +11,9 @@ circle,path{
 }
 
 text {
-    font-family: cursive;
-    font-size: 20px;
-    fill: white;
+    font-family: sans-serif;
+    font-size: 30px;
+    fill: deeppink;
     /*font-weight: bold;*/
     /*text-anchor: middle;*/
   }

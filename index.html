@@ -10,49 +10,50 @@
 		<g id="box">
 			<circle id="circle" class="st0" cx="0" cy="0" r="0"/>
 		</g>
+
+        <g id="n" visibility="hidden">
+			<text x="20" y="150">New Wave</text>
+		</g>
+		<g id="c" visibility="hidden">
+			<text x="450" y="150">CBGB</text>
+			<text x="450" y="200">The Clash</text>
+		</g>
+		<g id="w" visibility="hidden">
+			<text x="400" y="150">Vivienne Westwood</text>
+		</g>
 		<g id="a">
-			<text x="20" y="150">Amphétamines</text>
-			<text x="20" y="200">Anarchie</text>
-			<text x="180" y="150">Antisémitisme</text>
-			<text x="180" y="200">Asphalt Jungle</text>
+			<text x="900" y="150">Amphétamines</text>
+			<text x="900" y="200">Anarchie</text>
+			<text x="900" y="150">Antisémitisme</text>
+			<text x="900" y="200">Asphalt Jungle</text>
 		</g>
-		<g id="b" visibility="visible">
-			<text x="450" y="150">Blank Generation</text>
-			<text x="600" y="150">Bondage</text>
+		<g id="f" visibility="hidden">
+			<text x="1200" y="450">Fanzine</text>
 		</g>
-		<g id="c" visibility="visible">
-			<text x="750" y="200">CBGB</text>
-			<text x="900" y="200">The Clash</text>
-		</g>
-		<g id="f" visibility="visible">
-			<text x="900" y="450">Fanzine</text>
-		</g>
-		<g id="h" visibility="visible">
-			<text x="1200" y="300">Richard Hell</text>
-			<text x="1350" y="300">Hippie</text>
-		</g>
-		<g id="m" visibility="visible">
-			<text x="1500" y="150">Malcolm McLaren</text>
-			<text x="1700" y="150">MC5</text>
-			<text x="1500" y="200">Metal Urbain</text>
-		</g>
-		<g id="n" visibility="visible">
-			<text x="1400" y="400">New Wave</text>
-		</g>
-		<g id="p" visibility="visible">
+		<g id="p" visibility="hidden">
 			<text x="1700" y="400">Provocation</text>
 		</g>
-		<g id="r" visibility="visible">
-			<text x="1900" y="250">Jamie Reid</text>
+		<g id="s" visibility="hidden">
+			<text x="1600" y="300">Sex</text>
+			<text x="1600" y="350">Skydog</text>
+			<text x="1600" y="400">Svastika</text>
+			<text x="1600" y="450">Sid Vicious</text>
 		</g>
-		<g id="s" visibility="visible">
-			<text x="2200" y="300">Sex</text>
-			<text x="2350" y="300">Skydog</text>
-			<text x="2200" y="400">Svastika</text>
-			<text x="2350" y="400">Sid Vicious</text>
+		<g id="r" visibility="hidden">
+			<text x="2100" y="250">Jamie Reid</text>
 		</g>
-		<g id="w" visibility="visible">
-			<text x="2600" y="250">Vivienne Westwood</text>
+		<g id="m" visibility="hidden">
+			<text x="2500" y="150">Malcolm McLaren</text>
+			<text x="2500" y="200">MC5</text>
+			<text x="2500" y="250">Metal Urbain</text>
+		</g>
+		<g id="h" visibility="hidden">
+			<text x="2700" y="300">Richard Hell</text>
+			<text x="2700" y="350">Hippie</text>
+		</g>
+		<g id="b" visibility="hidden">
+			<text x="3000" y="150">Blank Generation</text>
+			<text x="3000" y="200">Bondage</text>
 		</g>
 	</svg>
 
@@ -109,27 +110,27 @@ function dragged(d) {
     cumul = p[0] + p[1];
     diff = 300;
     if(cumul < diff){
-    	ChangeLettre("a");
-    } else if(cumul > diff && cumul < diff*2){
-    	ChangeLettre("b");
-    } else if(cumul > diff*2 && cumul < diff*3){
-    	ChangeLettre("c");
-    } else if(cumul > diff*3 && cumul < diff*4){
-    	ChangeLettre("f");
-    } else if(cumul > diff*4 && cumul < diff*5){
-    	ChangeLettre("h");
-    } else if(cumul > diff*5 && cumul < diff*6){
-    	ChangeLettre("m");
-    } else if(cumul > diff*6 && cumul < diff*7){
     	ChangeLettre("n");
-    } else if(cumul > diff*7 && cumul < diff*8){
-    	ChangeLettre("p");
-    } else if(cumul > diff*8 && cumul < diff*9){
-    	ChangeLettre("r");
-    } else if(cumul > diff*9 && cumul < diff*10){
-    	ChangeLettre("s");
-    } else {
+    } else if(cumul > diff && cumul < diff*2){
+    	ChangeLettre("c");
+    } else if(cumul > diff*2 && cumul < diff*3){
     	ChangeLettre("w");
+    } else if(cumul > diff*3 && cumul < diff*4){
+    	ChangeLettre("a");
+    } else if(cumul > diff*4 && cumul < diff*5){
+    	ChangeLettre("f");
+    } else if(cumul > diff*5 && cumul < diff*6){
+    	ChangeLettre("p");
+    } else if(cumul > diff*6 && cumul < diff*7){
+    	ChangeLettre("s");
+    } else if(cumul > diff*7 && cumul < diff*8){
+    	ChangeLettre("r");
+    } else if(cumul > diff*8 && cumul < diff*9){
+    	ChangeLettre("m");
+    } else if(cumul > diff*9 && cumul < diff*10){
+    	ChangeLettre("h");
+    } else {
+    	ChangeLettre("b");
     }
 
 
@@ -140,8 +141,8 @@ function dragged(d) {
 
 function ChangeLettre(key) {
 	if(key != lettre) {
-		// document.getElementById(lettre).style.visibility = "hidden";
-		// document.getElementById(key).style.visibility = "visible";
+		document.getElementById(lettre).style.visibility = "hidden";
+		document.getElementById(key).style.visibility = "visible";
 		lettre = key;
 
 		console.log("Change lettre to ",key);		
